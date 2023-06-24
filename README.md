@@ -613,9 +613,10 @@ INFO[2023-06-25T00:56:20+03:30] Please read the README.md file in your new appli
   اضافه کردن این flag باعث می شود ساختار پروژه ما متفاوت باشد، برای مثال بخش های مربوط به frontend در آن نباشد.
   حال با cd کردن به دایرکتوری پروژه می توانیم موارد اضافه شده را ببینیم:
 
-<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/structure.png?raw=true"/></p>  
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/project_structure.png?raw=true"/></p>  
 
 ## Database Setup
+### Postgres setup
 در ابتدا باید دیتابیس خود را آماده کنیم. اینجا حق انتخاب بین انواع دیتابیس را داریم اما من دیتابیس Postgres را به دلیل آشنایی بیشتر با آن انتخاب کردم.
 برای راه اندازی  Postgres از Docker استفاده می کنیم. برای این هدف،  یک Dockerfile به شکل زیر می نویسیم:
 <div  dir='ltr'  align='justify'>
@@ -645,6 +646,55 @@ GRANT ALL PRIVILEGES ON DATABASE project_development TO test;
   </div>
 با اجرا شدن این فایل یک دیتابیس به نام project_development ساخته شده و به User ما تمام دسترسی ها را در مورد این دیتابیس می دهد.
 
+حال می توانیم با استفاده از دستور Docker build، این image را بسازیم سپس آن را run کنیم:
+
+ <div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/bufal_postgres$ docker build -t apidb .
+[+] Building 0.1s (7/7) FINISHED                                                                                                                                                       
+ => [internal] load .dockerignore                                                                                                                                                 0.0s
+ => => transferring context: 2B                                                                                                                                                   0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                              0.0s
+ => => transferring dockerfile: 168B                                                                                                                                              0.0s
+ => [internal] load metadata for docker.io/library/postgres:latest                                                                                                                0.0s
+ => [internal] load build context                                                                                                                                                 0.0s
+ => => transferring context: 29B                                                                                                                                                  0.0s
+ => [1/2] FROM docker.io/library/postgres:latest                                                                                                                                  0.0s
+ => CACHED [2/2] COPY init.sql /docker-entrypoint-initdb.d/                                                                                                                       0.0s
+ => exporting to image                                                                                                                                                            0.0s
+ => => exporting layers                                                                                                                                                           0.0s
+ => => writing image sha256:5728aacbb7dd52c7c8f96c46c8257b37297d9c5247ca6c07a9d411efff7293be                                                                                      0.0s
+ => => naming to docker.io/library/apidb                                                                                                                                          0.0s
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/bufal_postgres$ docker run -d --name apidb -p 5432:5432 apidb
+bb483f6eeaa895db1c51afe09e631afc6aa003b58421990d8707eec35180089d
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/bufal_postgres$ docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+bb483f6eeaa8   apidb     "docker-entrypoint.s…"   7 seconds ago   Up 6 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   apidb
+  ```
+  </div>
+
+  ### Configuring database.yml
+  فایل database.yml را به گ.نه ای تنظیم کنیم که API ما بتواند با دیتابیسی که با کمک Docker به راه انداختیم ارتباط برقرار کند:
+
+  <div  dir='ltr'  align='justify'>
+
+  ```yaml
+development:
+  dialect: postgres
+  database: project_development
+  user: test
+  password: test
+  host: 127.0.0.1
+  pool: 5
+
+test:
+  url: {{envOr "TEST_DATABASE_URL" "postgres://test:test@127.0.0.1:5432/project_test?sslmode=disable"}}
+
+production:
+  url: {{envOr "DATABASE_URL" "postgres://test:test@127.0.0.1:5432/project_production?sslmode=disable"}}
+  ```
+  </div>
 
 
 
