@@ -613,7 +613,7 @@ INFO[2023-06-25T00:56:20+03:30] Please read the README.md file in your new appli
   اضافه کردن این flag باعث می شود ساختار پروژه ما متفاوت باشد، برای مثال بخش های مربوط به frontend در آن نباشد.
   حال با cd کردن به دایرکتوری پروژه می توانیم موارد اضافه شده را ببینیم:
 
- ![dsa]("C:\Users\sinan\Desktop\buffalo\structure.png")  
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/structure.png?raw=true"/></p>  
 
 ## Database Setup
 در ابتدا باید دیتابیس خود را آماده کنیم. اینجا حق انتخاب بین انواع دیتابیس را داریم اما من دیتابیس Postgres را به دلیل آشنایی بیشتر با آن انتخاب کردم.
