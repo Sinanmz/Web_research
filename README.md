@@ -695,28 +695,350 @@ production:
   url: {{envOr "DATABASE_URL" "postgres://test:test@127.0.0.1:5432/project_production?sslmode=disable"}}
   ```
   </div>
+تتظیمان دیتابیس شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
+
+## Migration
+
+در این بخش با استفاده از دستورbuffalo pop generate fizz فایل های migration خود را میسازیم. با این دستور دو فایل در دایرکتوری migrations ایجاد می شود: یکی برای up migration و دیگری برای down migration به زبان ساده این فایل ها برای ایجاد تغییر در ابتدا و انتهای ارتباط با دبتا بیس هستند، در این جا قصد داریم در ابتدا یک table در دیتا بیس ساخته شود و در انتها این table پاک شود. این کار ها را به ترتیب فایل های up migration و down migration انجام می دهند.
+(برای اطلاعات بیشتر درمورد database migration  می توانید به [اینجا](https://www.astera.com/type/blog/database-migration-what-it-is-and-how-it-is-done/) مراجعه کنید)
+
+حال دستور خود را اجرا می کنیم:
+  <div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo pop generate fizz create_todos
+pop v6.1.1
+
+DEBU[2023-06-25T00:59:42+03:30] Step: 6908e204
+DEBU[2023-06-25T00:59:42+03:30] Chdir: /home/sina/project
+DEBU[2023-06-25T00:59:42+03:30] File: /home/sina/project/migrations/20230624212942_create_todos.up.fizz
+DEBU[2023-06-25T00:59:42+03:30] File: /home/sina/project/migrations/20230624212942_create_todos.down.fizz
+  ```
+  </div>
+  فایل up migration را به شکل زیر تغییر می دهیم:
+  <div  dir='ltr'  align='justify'>
+
+  ```
+  create_table("todos") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("item", "string", {"size": 100})
+  }
+  ```
+  </div>
+
+  فایل down migration را به شکل زیر تغییر می دهیم:
+
+    
+ <div  dir='ltr'  align='justify'>
+
+  ```
+  drop_table("todos")
+  ```
+  </div>
+
+
+  فایل up migration ما یک جدول می سازد و فایل down migration آن را پاک می کند.
+هر گاه بخواهیم up migration  انجام دهیم از دستور زیر استفاده می کنیم:
+
+<div  dir='ltr'  align='justify'>
+
+  ```bash
+buffalo pop migrate
+  ```
+  </div>
+
+## Creating our Model
+حال که جدول خود را با استفاده از migration ساختیم، وقت آن است که مد خود را بسازیم تا بتوانیم از آن جدول استفاده کنیم و از ORM استفاده کنیم.
+در ابتدا دستور زیر را وارد کنید تا فایل model ما ساخته شود:
+<div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo pop g model todo
+pop v6.1.1
+
+DEBU[2023-06-25T01:03:07+03:30] Step: e610c587
+DEBU[2023-06-25T01:03:07+03:30] Chdir: /home/sina/project
+DEBU[2023-06-25T01:03:07+03:30] File: /home/sina/project/models/todo.go
+DEBU[2023-06-25T01:03:07+03:30] File: /home/sina/project/models/todo_test.go
+DEBU[2023-06-25T01:03:07+03:30] Step: 67216f4a
+DEBU[2023-06-25T01:03:07+03:30] Chdir: /home/sina/project
+DEBU[2023-06-25T01:03:07+03:30] Step: ad1ce65d
+DEBU[2023-06-25T01:03:07+03:30] Chdir: /home/sina/project
+DEBU[2023-06-25T01:03:07+03:30] Exec: go mod tidy
+DEBU[2023-06-25T01:03:07+03:30] Step: 4b26eae8
+DEBU[2023-06-25T01:03:07+03:30] Chdir: /home/sina/project
+DEBU[2023-06-25T01:03:07+03:30] File: /home/sina/project/migrations/20230624213307_create_todoes.up.fizz
+DEBU[2023-06-25T01:03:07+03:30] File: /home/sina/project/migrations/20230624213307_create_todoes.down.fizz
+
+  ```
+  </div>
+سپس فایل ساخته شده را به شکل زیر تغییر می دهیم:
+
+
+
+<div  dir='ltr'  align='justify'>
+
+  ```go
+package models
+
+import (
+    "encoding/json"
+    "github.com/gobuffalo/pop/v5"
+    "github.com/gobuffalo/validate/v3"
+    "github.com/gofrs/uuid"
+    "time"
+)
+// Todo is used by pop to map your todoes database table to your go code.
+type Todo struct {
+    ID int `json:"id" db:"id"`
+    Item string `json:"item" db:"item"`
+    CreatedAt time.Time `json:"created_at" db:"created_at"`
+    UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+}
+
+// TableName overrides the table name used by Pop.
+func (u Todo) TableName() string {
+    return "todos"
+  }
+
+// String is not required by pop and may be deleted
+func (t Todo) String() string {
+    jt, _ := json.Marshal(t)
+    return string(jt)
+}
+
+// Todoes is not required by pop and may be deleted
+type Todos []Todo
+
+// String is not required by pop and may be deleted
+func (t Todos) String() string {
+    jt, _ := json.Marshal(t)
+    return string(jt)
+}
+
+// Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
+// This method is not required and may be deleted.
+func (t *Todo) Validate(tx *pop.Connection) (*validate.Errors, error) {
+    return validate.NewErrors(), nil
+}
+
+// ValidateCreate gets run every time you call "pop.ValidateAndCreate" method.
+// This method is not required and may be deleted.
+func (t *Todo) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
+    return validate.NewErrors(), nil
+}
+
+// ValidateUpdate gets run every time you call "pop.ValidateAndUpdate" method.
+// This method is not required and may be deleted.
+func (t *Todo) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
+    return validate.NewErrors(), nil
+}
+
+  ```
+  </div>
+
+(برای اطلاعات بیشتر درمورد ORM  می توانید به [اینجا](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/#:~:text=Object%20Relational%20Mapping%20(ORM)%20is,(OOP)%20to%20relational%20databases.) مراجعه کنید)
+
+## Building our Actions
+حال باید تابع هایی را بنویسیم که کار Controller را در MVC انجام می دهند.
+برای generate کردن فایل های آن ها از دستور زیر استفاده می کنیم:
+
+
+<div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo g actions todo index show add
+  ```
+  </div>
+
+این دستور یک فایل todo.go را در دایرکتوری actions درست می کند که دارای تابع های TodoIndex, TodoShow و TodoAdd است.این تابع ها را به شکل زیر تغییر می دهیم:
+<div  dir='ltr'  align='justify'>
+
+  ```go
+package actions
+
+import (
+    "net/http"
+    "github.com/gobuffalo/buffalo"
+    "project1/models"
+)
+
+// TodoIndex default implementation.
+func TodoIndex(c buffalo.Context) error {
+    // Create an array to receive todos
+    todos := []models.Todo{}
+    //get all the todos from database
+    err := models.DB.All(&todos)
+    // handle any error
+    if err != nil {
+        return c.Render(http.StatusOK, r.JSON(err))
+    }
+    //return list of todos as json
+    return c.Render(http.StatusOK, r.JSON(todos))
+}
+
+// TodoShow default implementation.
+func TodoShow(c buffalo.Context) error {
+    // grab the id url parameter defined in app.go
+    id := c.Param("id")
+    // create a variable to receive the todo
+    todo := models.Todo{}
+    // grab the todo from the database
+    err := models.DB.Find(&todo, id)
+    // handle possible error
+    if err != nil {
+        return c.Render(http.StatusOK, r.JSON(err))
+    }
+    //return the data as json
+    return c.Render(http.StatusOK, r.JSON(&todo))
+}
+
+
+// TodoAdd default implementation.
+func TodoAdd(c buffalo.Context) error {
+
+    //get item from url query
+    item := c.Param("item")
+
+    //create new instance of todo
+    todo := models.Todo{Item: item}
+
+    // Create a fruit without running validations
+    err := models.DB.Create(&todo)
+
+    // handle error
+    if err != nil {
+        return c.Render(http.StatusOK, r.JSON(err))
+    }
+
+    //return new todo as json
+    return c.Render(http.StatusOK, r.JSON(todo))
+}
+  ```
+  </div>
+
+## Creating the Routes
+در مرحله قبل route هایی به فایل actions/app.go اضافه شدند، حال آن ها را به شکل زیر تغییر می دهیم:
+<div  dir='ltr'  align='justify'>
+
+  ```go
+import (
+    "project1/models"
+    "github.com/gobuffalo/buffalo"
+    "github.com/gobuffalo/envy"
+    forcessl "github.com/gobuffalo/mw-forcessl"
+    paramlogger "github.com/gobuffalo/mw-paramlogger"
+    "github.com/unrolled/secure"
+    "github.com/gobuffalo/buffalo-pop/v2/pop/popmw"
+    contenttype "github.com/gobuffalo/mw-contenttype"
+    "github.com/gobuffalo/x/sessions"
+    "github.com/rs/cors"
+    "github.com/gobuffalo/packr/v2"
+)
+
+// ENV is used to help switch settings based on where the
+// application is being run. Default is "development".
+var ENV = envy.Get("GO_ENV", "development")
+var app *buffalo.App
+
+// App is where all routes and middleware for buffalo
+// should be defined. This is the nerve center of your
+// application.
+//
+// Routing, middleware, groups, etc... are declared TOP -> DOWN.
+// This means if you add a middleware to `app` *after* declaring a
+// group, that group will NOT have that new middleware. The same
+// is true of resource declarations as well.
+//
+// It also means that routes are checked in the order they are declared.
+// `ServeFiles` is a CATCH-ALL route, so it should always be
+// placed last in the route declarations, as it will prevent routes
+// declared after it to never be called.
+func App() *buffalo.App {
+    if app == nil {
+        app = buffalo.New(buffalo.Options{
+            Env:          ENV,
+            SessionStore: sessions.Null{},
+            PreWares: []buffalo.PreWare{
+                cors.Default().Handler,
+            },
+            SessionName: "_project1_session",
+        })
+
+        // Automatically redirect to SSL
+        app.Use(forceSSL())
+
+        // Log request parameters (filters apply).
+        app.Use(paramlogger.ParameterLogger)
+
+        // Set the request content type to JSON
+        app.Use(contenttype.Set("application/json"))
+
+        app.GET("/", HomeHandler)
+        app.GET("/todo/", TodoIndex)
+        app.GET("/todo/add", TodoAdd)
+        app.GET("/todo/{id}", TodoShow) // <--- MAKE SURE THIS IS AT BOTTOM OF LIST
+    }
+
+    return app
+}
+
+
+// forceSSL will return a middleware that will redirect an incoming request
+// if it is not HTTPS. "http://example.com" => "https://example.com".
+// This middleware does **not** enable SSL. for your application. To do that
+// we recommend using a proxy: https://gobuffalo.io/en/docs/proxy
+// for more information: https://github.com/unrolled/secure/
+func forceSSL() buffalo.MiddlewareFunc {
+    return forcessl.Middleware(secure.Options{
+        SSLRedirect:     ENV == "production",
+        SSLProxyHeaders: map[string]string{"X-Forwarded-Proto": "https"},
+    })
+}
+  ```
+  </div>
+ در واقع URL های مورد نظرا به handler های مناسب هرکدام وصل کردیم.
+
+ ## Testing
+در ابتدا نباید فراموش کنیم که دستور مورد نظر برای up migration  را انجام بدهیم تا بتوانیم از جدول های مورد نظر در دیتابیس اشتفاده کنیم:
+<div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo pop migrate
+pop v6.1.1
+
+[POP] 2023/06/25 01:11:00 info - > create_todoes
+[POP] 2023/06/25 01:11:00 info - Successfully applied 1 migrations.
+[POP] 2023/06/25 01:11:00 info - 0.0145 seconds
+[POP] 2023/06/25 01:11:00 info - dumped schema for project_development
+  ```
+  </div>
+  حال برای بالا آوردن سرور خود از دستور زیر استفاده می کنیم:
+  <div  dir='ltr'  align='justify'>
+
+  ```bash
+sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo dev
+  ```
+  </div>
+  اکنون اگر به آدرس localhost:3000 در مرورگر خود برویم با صحنه رو به رو مواجه می شویم:
+  
+  <p align="center"><img src=""/></p>
+
+تست کردن سرور ما به این گونه است:
+- اگر به آدرس "localhost:3000/todo/add?item="something برویم، something به لیست todo اضافه می شود.
+- اگر به آدرس /localhost:3000/todo برویم، کل لیست را می توانیم ببینیم.
+- اگر به آدرس localhost:3000/todo/1 برویم، فقط ایندکس مشخص شده را می توانیم ببینیم.
+
+برای تست کردن سرور خود ابتدا به breakfast, lunch, meeting, dinner را به لیست اضافه می کنم، سپس کل لیست را مشاهده کرده و در نهایت فقط ایندکس دوم را مشاهده می کنیم:
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/breakfast.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/lunch.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/meeting.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/dinner.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/list.png?raw=true"/></p>
+<p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/index_2.png?raw=true"/></p>
+می توان نتیجه گرفت که سرور ما به درستی کار می کند.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-- [Building an API](#building-an-api)
-  - [Database Setup](#database-setup)
-  - [Migration](#migration)
-  - [Creating our Model](#creating-our-model)
-  - [Building our Actions](#building-our-actions)
-  - [Creating the Routes](#creating-the-routes)
-  - [Testing](#testing)
