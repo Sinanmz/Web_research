@@ -1002,7 +1002,7 @@ sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo dev
   </div>
   اکنون اگر به آدرس localhost:3000 در مرورگر خود برویم با صحنه رو به رو مواجه می شویم:
   
-  <p align="center"><img src=""/></p>
+  <p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/welcome.png?raw=true"/></p>
 
 تست کردن سرور ما به این گونه است:
 - اگر به آدرس "localhost:3000/todo/add?item="something برویم، something به لیست todo اضافه می شود.
