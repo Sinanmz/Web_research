@@ -55,7 +55,7 @@
  ### gorilla/mux
  کتابخانه [gorilla/mux](https://github.com/gorilla/mux) یکی از پراستفاده ترین router ها در Go است. با اینکه بعضی از router ها مانند httprouter ازgorilla/mux سریع تر هستند، gorilla/mux قابلیت های بسیار بیشتری را داشته و به اندازی کافی سریع است.
  ### pop
-کتابخانه [pop](https://github.com/gobuffalo/pop)، برای بوفالو ORM پیشفرض است. Soda toolbox را برای نیاز های مربوط به پایگاه داده را فراهم می کند وبسیاری از انواع دیتا بیس را پشتیبانی می کند مانند: PostgreSQL, MySQL, SQLite
+کتابخانه [pop](https://github.com/gobuffalo/pop)، برای بوفالو ORM پیشفرض است. Soda toolbox را برای نیاز های مربوط به پایگاه داده را فراهم می کند و بسیاری از انواع دیتا بیس را پشتیبانی می کند مانند: PostgreSQL, MySQL, SQLite
 
 
 (برای اطلاعات بیشتر درمورد کار های یک ORM می توانید به [اینجا](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/) مراجعه کنید)
@@ -103,7 +103,7 @@
 <br/>
 
 #### Database Specific Requirements
-اگر به دیتابیس نیازی ندارید نیز به این نیازمندی ها نیازی ندارید:
+اگر به database نیازی ندارید نیز به این نیازمندی ها نیازی ندارید:
 - SQLite3: GCC , or equivalent C compiler for mattn/gp-sqlite3
 
 <br/>
@@ -431,7 +431,7 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
 <br/>
 
    ## Directory Structure
-Buffalo یک ساختار directory مینیمال را برای شما فراهم می کند تا بتوانید روی پروژه کار بکنید. این ساختار به تمیز نگه داشتن پروژه شما کمک می کند و به عملکرد بهتر generator ها کمک می کند. 
+بوفالو یک ساختار directory مینیمال را برای شما فراهم می کند تا بتوانید روی پروژه کار بکنید. این ساختار به تمیز نگه داشتن پروژه شما کمک می کند و به عملکرد بهتر generator ها کمک می کند. 
 
 حال با ساختار یک پروژه Buffalo آشنا می شویم.
 
@@ -498,7 +498,7 @@ Buffalo یک ساختار directory مینیمال را برای شما فراه
 ### models
 در این دایرکتوری بخش Model از طراحی MVC قرار می گیرد. این دایرکتوری شامل فایل models.go است که وضیفه initialize کردن ارتباط با datasource را انجام می دهد.
 (اگر از generator های pop/soda برای generate کردن مدل ها استفاده می کنید در این جا generate می شوند.)
-  (این دایرکتوری نیز اختیاری است و اگر از دیتابیس استفاده نمی کنید می تواند پاک شود.)
+  (این دایرکتوری نیز اختیاری است و اگر از database استفاده نمی کنید می تواند پاک شود.)
 
 ### public
 این دایرکتوری شامل asset های کامپایل شده است و اگر از webpack استفاده می کنید، asset های خود را در اینجا قرار می دهد.
@@ -514,7 +514,7 @@ Buffalo یک ساختار directory مینیمال را برای شما فراه
 
   ### database.yml
    این دایرکتوری شامل database configuration برای soda/pop است.
-   (این دایرکتوری نیز اختیاری است و اگر از دیتابیس استفاده نمی کنید می تواند پاک شود.)
+   (این دایرکتوری نیز اختیاری است و اگر از database استفاده نمی کنید می تواند پاک شود.)
   
   
 <br/>
@@ -522,7 +522,7 @@ Buffalo یک ساختار directory مینیمال را برای شما فراه
 
 
   # Building an API
-  در این بخش قصد داریم برای آشنایی بیشتر با Buffalo به صورت عملی، یک API ساده بنویسیم. این API کار هایی باید در طول روز انجام دهیم را دریافت کرده و آن ها را در یک دیتابیس ذخیره کرده و به طور کلی یک TODO List درست می کند. در این مسیر با بخش های مختلف یک Buffalo project آشنا می شویم و نحوه ارتباط آن  با دیتابیس را بررسی می کنیم و نقش Migration را متوجه می شویم.
+  در این بخش قصد داریم برای آشنایی بیشتر با Buffalo به صورت عملی، یک API ساده بنویسیم. این API کار هایی باید در طول روز انجام دهیم را دریافت کرده و آن ها را در یک database ذخیره کرده و به طور کلی یک TODO List درست می کند. در این مسیر با بخش های مختلف یک Buffalo project آشنا می شویم و نحوه ارتباط آن  با database را بررسی می کنیم و نقش Migration را متوجه می شویم.
 
 <br/>
 
@@ -646,7 +646,7 @@ INFO[2023-06-25T00:56:20+03:30] Please read the README.md file in your new appli
 
 ## Database Setup
 ### Postgres setup
-در ابتدا باید دیتابیس خود را آماده کنیم. اینجا حق انتخاب بین انواع دیتابیس را داریم اما من دیتابیس Postgres را به دلیل آشنایی بیشتر با آن انتخاب کردم.
+در ابتدا باید database خود را آماده کنیم. اینجا حق انتخاب بین انواع database را داریم اما من database Postgres را به دلیل آشنایی بیشتر با آن انتخاب کردم.
 برای راه اندازی  Postgres از Docker استفاده می کنیم. برای این هدف،  یک Dockerfile به شکل زیر می نویسیم:
 <div  dir='ltr'  align='justify'>
 
@@ -673,7 +673,7 @@ CREATE DATABASE project_development;
 GRANT ALL PRIVILEGES ON DATABASE project_development TO test;
   ```
   </div>
-با اجرا شدن این فایل یک دیتابیس به نام project_development ساخته شده و به User ما تمام دسترسی ها را در مورد این دیتابیس می دهد.
+با اجرا شدن این فایل یک database به نام project_development ساخته شده و به User ما تمام دسترسی ها را در مورد این database می دهد.
 
 حال می توانیم با استفاده از دستور Docker build، این image را بسازیم سپس آن را run کنیم:
 
@@ -706,7 +706,7 @@ bb483f6eeaa8   apidb     "docker-entrypoint.s…"   7 seconds ago   Up 6 seconds
 <br/>
 
   ### Configuring database.yml
-  فایل database.yml را به گ.نه ای تنظیم کنیم که API ما بتواند با دیتابیسی که با کمک Docker به راه انداختیم ارتباط برقرار کند:
+  فایل database.yml را به گ.نه ای تنظیم کنیم که API ما بتواند با database ای که با کمک Docker به راه انداختیم ارتباط برقرار کند:
 
   <div  dir='ltr'  align='justify'>
 
@@ -726,7 +726,7 @@ production:
   url: {{envOr "DATABASE_URL" "postgres://test:test@127.0.0.1:5432/project_production?sslmode=disable"}}
   ```
   </div>
-تتظیمان دیتابیس شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
+تتظیمان database شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
 
 <br/>
 
@@ -1041,7 +1041,7 @@ func forceSSL() buffalo.MiddlewareFunc {
 <br/>
 
  ## Testing
-در ابتدا نباید فراموش کنیم که دستور مورد نظر برای up migration  را انجام بدهیم تا بتوانیم از جدول های مورد نظر در دیتابیس اشتفاده کنیم:
+در ابتدا نباید فراموش کنیم که دستور مورد نظر برای up migration  را انجام بدهیم تا بتوانیم از جدول های مورد نظر در database اشتفاده کنیم:
 <div  dir='ltr'  align='justify'>
 
   ```bash
