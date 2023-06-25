@@ -91,17 +91,20 @@
 - A working Go enviroment
 - Go version v1.16.0
 
+<br/>
 
 #### Frontend Requirements
 نیازمندی های زیر اختیاری هستند، یعنی اگر بخواهید صرفا یک API بسازید یا برنامه خود را به شکل old-fashioned بسازید نیازی یه آن ها ندارید:
 - node version 8 or greater
 - either yarn or npm
 
+<br/>
 
 #### Database Specific Requirements
 اگر به دیتابیس نیازی ندارید نیز به این نیازمندی ها نیازی ندارید:
 - SQLite3: GCC , or equivalent C compiler for mattn/gp-sqlite3
 
+<br/>
 
 #### Installation
 برای GNU/Linux دستورات زیر را وارد کنید:
@@ -124,6 +127,8 @@
      mv buffalo ~/bin/buffalo
   ```
   </div>
+
+<br/>
 
   #### Verify Your Installation
   شما می توانید برای اطمینان از نصب شدن Buffalo دستور buffalo را در ترمینال خود اجرا کنید:
@@ -162,8 +167,13 @@ Use "buffalo [command] --help" for more information about a command.
   ```
   </div>
 
+<br/>
+
   ## Generating a New Project
   حال که Buffalo را نصب کردید در این بخش یاد می گیرید چگونه یک web application جدید را از اول با استفاده از دستور buffalo شروع کنید.
+  
+  <br/>
+
   ### Create a New Project
   هدف Buffalo این است که ساختن یک web application از ابتدا را تا حد امکان ساده و سریع کند، و چه چیزی سریع تر و ساده تر از یک new application generator است؟
   در ابتدا به دایرکتوری که می خواهید پروژه شما در آن جا باشد بروید، سپس دستور زیر را اجرا کنید:
@@ -342,6 +352,8 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
   - شروع کردن یک Git repository
   - Frontend dependency های مورد نیاز
 
+<br/>
+
   ### Create a Customized App
   default setup ای که Buffalo انتخاب می کند خیلی خوب است اما ممکن است شما بخواهید آن را به شکلی که دوست دارید تغییر بدهید، برای مثال از دیتابیس mariadb به جای postgres استفاده بکنید. برای این نوع کار ها از دستور زیر استفاده کنید تا لیست flag های مورد نیاز برای این کار را ببینید:
   <div  dir='ltr'  align='justify'>
@@ -373,6 +385,8 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
   </div>
   همانطور که می بینی می توانین انتخاب کنید که یک API application ایجاد کنید و کلا بخش های Front end را skip کنید و ...
 
+<br/>
+
   ### Override Default Config
   در حالت عادی دستور buffalo new به دنبال یک confiratio file در آدرس $HOME/ .buffalo.yml می گردد و اگر وجود داشت تلاش می کند طبق آن عمل کند. شما می توانید با استفاده از flag ها آن را override  کنید و آن های که دوست دارید را پاس بدهید و یا با استفاده از --config آدرس یک فایل YAML دیگری را بدهید. همچنین استفاده از --skip-config باعث می شود که هر فایل  config را نادیده بگیرد و فقط بر اساس flag هایی که داده می شود عمل کند.
   
@@ -388,6 +402,8 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
   ```
   </div>
 
+<br/>
+
   ### Running Your Application in Development
   یکی از بدی های GO development  این است که اگر تغییری در برنامه خود بدهیم نیاز است اپلیکیشن خود را متوقف کنیم و دوباره آن را راه بیاندازیم تا تغییرات را ببینیم. اما در Buffalo کافیست دسور زیر را اجرا کنیم:
   <div  dir='ltr'  align='justify'>
@@ -399,6 +415,8 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
   ای دستور فایل های .go و .html و فولدر asset را زیر نظر می گیرد و هرگاه تغییری در آن بدهید آن را نشان می دهد.
   کافیست این دستور را اجرا کنیو و به localhost:3000 برویم تا تغییرات را ببینیم.
   
+  <br/>
+
   #### Run the dev server on a custom port
   گاهی پورت 3000 در دستگاه شما مشغول است و باید برنامه را بر روی پورت دیگری اجرا کنید، این کار با دستور زیر انجام می شود:
   <div  dir='ltr'  align='justify'>
@@ -408,10 +426,14 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
   ```
   </div>
 
+<br/>
+
    ## Directory Structure
 Buffalo یک ساختار directory مینیمال را برای شما فراهم می کند تا بتوانید روی پروژه کار بکنید. این ساختار به تمیز نگه داشتن پروژه شما کمک می کند و به عملکرد بهتر generator ها کمک می کند. 
 
 حال با ساختار یک پروژه Buffalo آشنا می شویم.
+
+<br/>
 
 ### The Root Directory
  نمودار زیر ساختار یک پروژه Buffalo را نشان می دهد:
@@ -454,6 +476,8 @@ Buffalo یک ساختار directory مینیمال را برای شما فراه
   ```
   </div>
 
+<br/>
+
 ### actions
 در این دایرکتوری بخش Controller  طراحی MVC قرار می گیرد. این دایرکتوری شامل handler ها برای URL است. به علاوه شامل 2 فایل زیر نیز است:
 - app.go که کار برپا کردن برنامه و reouteها را انجام می دهد
@@ -491,10 +515,14 @@ Buffalo یک ساختار directory مینیمال را برای شما فراه
    (این دایرکتوری نیز اختیاری است و اگر از دیتابیس استفاده نمی کنید می تواند پاک شود.)
   
   
+<br/>
+
 
 
   # Building an API
   در این بخش قصد داریم برای آشنایی بیشتر با Buffalo به صورت عملی، یک API ساده بنویسیم. این API کار هایی باید در طول روز انجام دهیم را دریافت کرده و آن ها را در یک دیتابیس ذخیره کرده و به طور کلی یک TODO List درست می کند. در این مسیر با بخش های مختلف یک Buffalo project آشنا می شویم و نحوه ارتباط آن  با دیتابیس را بررسی می کنیم و نقش Migration را متوجه می شویم.
+
+<br/>
 
 ## Starting a Buffalo Project
 شروع کردن یک Buffalo project با استفاده از دستور buffalo new انجام می شود. در این جا جون قصد داریم یک API بسازیم به آن --api را اضافه می کنیم.
@@ -612,6 +640,8 @@ INFO[2023-06-25T00:56:20+03:30] Please read the README.md file in your new appli
 
 <p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/project_structure.png?raw=true"/></p>  
 
+<br/>
+
 ## Database Setup
 ### Postgres setup
 در ابتدا باید دیتابیس خود را آماده کنیم. اینجا حق انتخاب بین انواع دیتابیس را داریم اما من دیتابیس Postgres را به دلیل آشنایی بیشتر با آن انتخاب کردم.
@@ -671,6 +701,8 @@ bb483f6eeaa8   apidb     "docker-entrypoint.s…"   7 seconds ago   Up 6 seconds
   ```
   </div>
 
+<br/>
+
   ### Configuring database.yml
   فایل database.yml را به گ.نه ای تنظیم کنیم که API ما بتواند با دیتابیسی که با کمک Docker به راه انداختیم ارتباط برقرار کند:
 
@@ -693,6 +725,8 @@ production:
   ```
   </div>
 تتظیمان دیتابیس شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
+
+<br/>
 
 ## Migration
 
@@ -743,6 +777,8 @@ DEBU[2023-06-25T00:59:42+03:30] File: /home/sina/project/migrations/202306242129
 buffalo pop migrate
   ```
   </div>
+
+<br/>
 
 ## Creating our Model
 حال که جدول خود را با استفاده از migration ساختیم، وقت آن است که مد خود را بسازیم تا بتوانیم از آن جدول استفاده کنیم و از ORM استفاده کنیم.
@@ -836,6 +872,8 @@ func (t *Todo) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 
 (برای اطلاعات بیشتر درمورد ORM  می توانید به [اینجا](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/#:~:text=Object%20Relational%20Mapping%20(ORM)%20is,(OOP)%20to%20relational%20databases.) مراجعه کنید)
 
+<br/>
+
 ## Building our Actions
 حال باید تابع هایی را بنویسیم که کار Controller را در MVC انجام می دهند.
 برای generate کردن فایل های آن ها از دستور زیر استفاده می کنیم:
@@ -913,6 +951,8 @@ func TodoAdd(c buffalo.Context) error {
 }
   ```
   </div>
+
+<br/>
 
 ## Creating the Routes
 در مرحله قبل route هایی به فایل actions/app.go اضافه شدند، حال آن ها را به شکل زیر تغییر می دهیم:
@@ -996,6 +1036,8 @@ func forceSSL() buffalo.MiddlewareFunc {
   </div>
  در واقع URL های مورد نظرا به handler های مناسب هرکدام وصل کردیم.
 
+<br/>
+
  ## Testing
 در ابتدا نباید فراموش کنیم که دستور مورد نظر برای up migration  را انجام بدهیم تا بتوانیم از جدول های مورد نظر در دیتابیس اشتفاده کنیم:
 <div  dir='ltr'  align='justify'>
@@ -1034,6 +1076,8 @@ sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo dev
 <p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/list.png?raw=true"/></p>
 <p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/index_2.png?raw=true"/></p>
 می توان نتیجه گرفت که سرور ما به درستی کار می کند.
+
+<br/>
 
 # Sources
 - [gobuffalo.io](https://gobuffalo.io/)
