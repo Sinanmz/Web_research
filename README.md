@@ -520,7 +520,7 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
 
   ### database.yml
    این دایرکتوری شامل database configuration برای soda/pop است.
-   
+
    (این دایرکتوری نیز اختیاری است و اگر از database استفاده نمی کنید می تواند پاک شود.)
   
   
@@ -534,8 +534,8 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
 <br/>
 
 ## Starting a Buffalo Project
-شروع کردن یک Buffalo project با استفاده از دستور buffalo new انجام می شود. در این جا جون قصد داریم یک API بسازیم به آن --api را اضافه می کنیم.
-حال دستور را اضافه می کنیم:
+شروع کردن یک Buffalo project با استفاده از دستور buffalo new انجام می شود. در این جا چون قصد داریم یک API بسازیم به آن --api را اضافه می کنیم.
+حال دستور را وارد می کنیم:
 
 <div  dir='ltr'  align='justify'>
 
@@ -733,13 +733,14 @@ production:
   url: {{envOr "DATABASE_URL" "postgres://test:test@127.0.0.1:5432/project_production?sslmode=disable"}}
   ```
   </div>
-تتظیمان database شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
+تنظیمات database شما ممکن است متفاوت باشد بنابراین به این نکته توجه داشته باشید.
 
 <br/>
 
 ## Migration
 
-در این بخش با استفاده از دستورbuffalo pop generate fizz فایل های migration خود را میسازیم. با این دستور دو فایل در دایرکتوری migrations ایجاد می شود: یکی برای up migration و دیگری برای down migration به زبان ساده این فایل ها برای ایجاد تغییر در ابتدا و انتهای ارتباط با دبتا بیس هستند، در این جا قصد داریم در ابتدا یک table در دیتا بیس ساخته شود و در انتها این table پاک شود. این کار ها را به ترتیب فایل های up migration و down migration انجام می دهند.
+در این بخش با استفاده از دستورbuffalo pop generate fizz فایل های migration خود را میسازیم. با این دستور دو فایل در دایرکتوری migrations ایجاد می شود: یکی برای up migration و دیگری برای down migration به زبان ساده این فایل ها برای ایجاد تغییر در ابتدا و انتهای ارتباط با database هستند، در این جا قصد داریم در ابتدا یک table در database ساخته شود و در انتها این table پاک شود. این کار ها را به ترتیب فایل های up migration و down migration انجام می دهند.
+
 (برای اطلاعات بیشتر درمورد database migration  می توانید به [اینجا](https://www.astera.com/type/blog/database-migration-what-it-is-and-how-it-is-done/) مراجعه کنید)
 
 حال دستور خود را اجرا می کنیم:
