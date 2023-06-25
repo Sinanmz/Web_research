@@ -59,7 +59,6 @@
 کتابخانه pop، برای بوفالو ORM پیشفرض است. Soda toolbox را برای نیاز های مربوط به پایگاه داده را فراهم می کند وبسیاری از انواع دیتا بیس را پشتیبانی می کند مانند: PostgreSQL, MySQL, SQLite
 
 
-
 (برای اطلاعات بیشتر درمورد کار های یک ORM می توانید به [اینجا](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/) مراجعه کنید)
 
 
