@@ -82,7 +82,7 @@
 ## Install Buffalo
 در این بخش یاد می گیرید چگونه Buffalo را نصب بکنید.
 
-Buffalo در حال حاضر بر روی این پلتفرم ها تست شده و قابل نصی است:
+ در حال حاضر بر روی این پلتفرم ها تست شده و قابل نصب است:
 - GNU/Linux
 - Mac OSX
 - Windows
@@ -90,13 +90,19 @@ Buffalo در حال حاضر بر روی این پلتفرم ها تست شده 
 قبل از نصب کردن مطمئن شوید پیشنیاز های مورد نیاز را نصب شده دارید:
 - A working Go enviroment
 - Go version v1.16.0
+
+
 #### Frontend Requirements
 نیازمندی های زیر اختیاری هستند، یعنی اگر بخواهید صرفا یک API بسازید یا برنامه خود را به شکل old-fashioned بسازید نیازی یه آن ها ندارید:
 - node version 8 or greater
 - either yarn or npm
+
+
 #### Database Specific Requirements
 اگر به دیتابیس نیازی ندارید نیز به این نیازمندی ها نیازی ندارید:
 - SQLite3: GCC , or equivalent C compiler for mattn/gp-sqlite3
+
+
 #### Installation
 برای GNU/Linux دستورات زیر را وارد کنید:
   <div  dir='ltr'  align='justify'>
