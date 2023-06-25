@@ -54,21 +54,29 @@
  ### buffalo
  بوفالو مانند یک چسب در میان اجزا فراهم شده بوده و دور بقیه کتاب خانه ها و میپیچد و جریان کاری را مدیریت می کند.
  ### gorilla/mux
- gorilla mux یکی از پراستفاده ترین router ها در Go است. با اینکه بعضی از router ها مانند httprouter ازgorilla/mux سریع تر هستند، gorilla/mux قابلیت های بسیار بیشتری را داشته و به اندازی کافی سریع است.
+ کتابخانه gorilla/mux یکی از پراستفاده ترین router ها در Go است. با اینکه بعضی از router ها مانند httprouter ازgorilla/mux سریع تر هستند، gorilla/mux قابلیت های بسیار بیشتری را داشته و به اندازی کافی سریع است.
  ### pop
-pop، برای بوفالو ORM پیشفرض است. Soda toolbox را برای نیاز های مربوط به پایگاه داده را فراهم می کند وبسیاری از انواع دیتا بیس را پشتیبانی می کند مانند: PostgreSQL, MySQL, SQLite
+کتابخانه pop، برای بوفالو ORM پیشفرض است. Soda toolbox را برای نیاز های مربوط به پایگاه داده را فراهم می کند وبسیاری از انواع دیتا بیس را پشتیبانی می کند مانند: PostgreSQL, MySQL, SQLite
+
+<br />
+
 (برای اطلاعات بیشتر درمورد کار های یک ORM می توانید به [اینجا](https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/) مراجعه کنید)
+
+
  ### plush
- plush برای بوفالو templating engine پیشفرض بوده و سینتکس آن خیلی شبیه به ERB template ها در Ruby است.
+ کتابخانه plush برای بوفالو templating engine پیشفرض بوده و سینتکس آن خیلی شبیه به ERB template ها در Ruby است.
+ 
+ <br />
+
 (برای اطلاعات بیشتر درمورد کار های یک templating engin می توانید به [اینجا](https://www.educative.io/answers/what-are-template-engines) مراجعه کنید)
 
  ## Frontend Libraries
  ### Boostrap
- کتابخانهBoostrap یکی از معروف ترین کتابخانه های ابزار frontend است. این کتابخانه کمک می کند  interface ها را با بخش های معمول مثل جدول ها، carousel ها یا grid layout ها بسازیم.
+ کتابخانه Bootstrap یکی از معروف ترین کتابخانه های ابزار frontend است. این کتابخانه کمک می کند  interface ها را با بخش های معمول مثل جدول ها، carousel ها یا grid layout ها بسازیم.
 ### JQuery
-JQuery یک کتابخانه غنی است که هدف آن این است که دستکاری کردن DOM  و فرستادن AJAX query ها را ساده کند. با این که امروزه کمتر استفاده می شود، اما بسیاری از پروژه ها هنوز آن را همراه دارند تا برای پشتیبانی از انواع مرورگر ها از آن کمک بگیرند.
+کتابخانه JQuery یک کتابخانه غنی است که هدف آن این است که دستکاری کردن DOM  و فرستادن AJAX query ها را ساده کند. با این که امروزه کمتر استفاده می شود، اما بسیاری از پروژه ها هنوز آن را همراه دارند تا برای پشتیبانی از انواع مرورگر ها از آن کمک بگیرند.
 ### Webpack
-Webpack یک Javascript assets bundler شناخته شده است . Webpack به صورت پیشفرض برای hash وکوچک کردن asset های شما تنظیم شده است.
+کتابخانه Webpack یک Javascript assets bundler شناخته شده است . Webpack به صورت پیشفرض برای hash وکوچک کردن asset های شما تنظیم شده است.
 
 </div>
 
