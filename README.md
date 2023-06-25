@@ -1022,8 +1022,10 @@ sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo dev
 می توان نتیجه گرفت که سرور ما به درستی کار می کند.
 
 # Sources
-[gobuffalo.io](https://gobuffalo.io/)
-[dev.to](https://dev.to/alexmercedcoder/api-with-go-buffalo-in-2021-from-zero-to-deploy-5642)
+- [gobuffalo.io](https://gobuffalo.io/)
+
+
+- [dev.to](https://dev.to/alexmercedcoder/api-with-go-buffalo-in-2021-from-zero-to-deploy-5642)
 
 
 
