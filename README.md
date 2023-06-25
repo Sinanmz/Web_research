@@ -29,6 +29,9 @@
   - [Building our Actions](#building-our-actions)
   - [Creating the Routes](#creating-the-routes)
   - [Testing](#testing)
+
+- [Sources](#sources)
+
   
   
   
@@ -1018,7 +1021,9 @@ sina@sina-Zephyrus-S-GX531GS-GX531GS:~/project$ buffalo dev
 <p align="center"><img src="https://github.com/Sinanmz/Web_research/blob/master/images/index_2.png?raw=true"/></p>
 می توان نتیجه گرفت که سرور ما به درستی کار می کند.
 
-
+# Sources
+[gobuffalo.io](https://gobuffalo.io/)
+[dev.to](https://dev.to/alexmercedcoder/api-with-go-buffalo-in-2021-from-zero-to-deploy-5642)
 
 
 
