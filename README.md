@@ -65,7 +65,6 @@
  ### plush
  کتابخانه plush برای بوفالو templating engine پیشفرض بوده و سینتکس آن خیلی شبیه به ERB template ها در Ruby است.
  
- <br />
 
 (برای اطلاعات بیشتر درمورد کار های یک templating engin می توانید به [اینجا](https://www.educative.io/answers/what-are-template-engines) مراجعه کنید)
 
