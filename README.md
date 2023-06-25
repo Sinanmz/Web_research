@@ -357,7 +357,7 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
 
 
   ### Create a Customized App
-  آن default setup ای که Buffalo انتخاب می کند خیلی خوب است اما ممکن است شما بخواهید آن را به شکلی که دوست دارید تغییر بدهید، برای مثال از دیتابیس mariadb به جای postgres استفاده بکنید. برای این نوع کار ها از دستور زیر استفاده کنید تا لیست flag های مورد نیاز برای این کار را ببینید:
+  آن default setup ای که Buffalo انتخاب می کند خیلی خوب است اما ممکن است شما بخواهید آن را به شکلی که دوست دارید تغییر بدهید، برای مثال از database mariadb به جای postgres استفاده بکنید. برای این نوع کار ها از دستور زیر استفاده کنید تا لیست flag های مورد نیاز برای این کار را ببینید:
   <div  dir='ltr'  align='justify'>
 
   ```bash
@@ -385,7 +385,7 @@ INFO[2022-05-25T11:06:46-05:00] Please read the README.md file in your new appli
     -v, --verbose              verbosely print out the go get commands
   ```
   </div>
-  همانطور که می بینی می توانین انتخاب کنید که یک API application ایجاد کنید و کلا بخش های Front end را skip کنید و ...
+  همانطور که می بینید می توانین انتخاب کنید که یک API application ایجاد کنید و کلا بخش های Front end را skip کنید و ...
 
 <br/>
 
